@@ -53,15 +53,9 @@ if uploaded_file is not None:
                     for sentence in flattened:
                         conversation = add_message(conversation, "user", sentence)
                     st.success('File processed successfully!')
-                    st.write('No relevant info found')
-if question and flattened:
-    if st.button("Answer Question"):
-        st.write('No relevant info found')
-        with st.spinner('Analyzing...'):
-            relevant_info = ""
-            for sentence in flattened:
-                hasinfo = HasInfo(question, sentence).choices[0].message.content
-                if 'Yes' in hasinfo or 'yes' in hasinfo:
-                    relevant_info = sentence
-                    
-                    break
+                    for sentence in flattened:
+                        hasinfo = HasInfo(question, sentence).choices[0].message.content
+                        if 'Yes' in hasinfo or 'yes' in hasinfo:
+                            relevant_info = sentence
+                            st.write("Relevant information found:", relevant_info)
+                            break
