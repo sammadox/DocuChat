@@ -57,7 +57,6 @@ if uploaded_file is not None:
                         hasinfo = HasInfo(question, sentence).choices[0].message.content
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
                             relevant_info = sentence
-                            answer=answerquery(question,sentence).choices[0].message.content
-                            st.write("Relevant answer found:", answer)
+                            #answer=answerquery(question,sentence).choices[0].message.content
                             break
-    
+                    st.write("Relevant answer found:", relevant_info)
