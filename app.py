@@ -60,3 +60,4 @@ if uploaded_file is not None:
                             answer=answerquery(question,sentence).choices[0].message.content
                             st.write("Relevant answer found:", answer)
                             break
+    st.write("Relevant answer found:", answer)
