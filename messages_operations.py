@@ -84,4 +84,12 @@ def HasInfo(userquery, chunk):
     res=send_chat_message(conversation)
     return res
 
-# Example usage
+#A function that answer based on text and answer
+def answerquery(userquery,chunk):
+    conversation = []
+    conversation = add_message(conversation, "user", "answer the following question " + userquery + " based on the following text " + chunk + " reply with a yes or no")
+    # More logic here
+    res=send_chat_message(conversation)
+    return res
+
+
