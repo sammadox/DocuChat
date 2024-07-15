@@ -57,6 +57,5 @@ if uploaded_file is not None:
                         hasinfo = HasInfo(question, sentence).choices[0].message.content
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
                             relevant_info = sentence
-                           
                             st.write("Relevant information found:", relevant_info)
                             break
