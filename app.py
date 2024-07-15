@@ -52,4 +52,5 @@ if uploaded_file is not None:
 
     question = st.text_input("Enter your question")
     if question:
-        st.write("Question entered:", question)
+        if st.button("Read Question"):
+            st.write("Question entered:", question)

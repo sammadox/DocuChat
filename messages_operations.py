@@ -1,4 +1,5 @@
 import json
+from AzureOp import send_chat_message
 
 def add_message(conversation, role, content):
     new_message = {"role": role, "content": content}
@@ -40,3 +41,48 @@ def parse_message(formatted_message):
     return None, None
 
 
+def test_get_message_content():
+    # Sample conversation data
+    conversation = [
+        {"content": "Hello! How can I help you today?"},
+        {"content": "Can you tell me the weather forecast for today?"},
+        {"content": "Sure, the weather today is sunny with a high of 25 degrees."},
+    ]
+
+    # Test cases
+    test_cases = [
+        (conversation, 0, "Hello! How can I help you today?"), # Valid index
+        (conversation, 1, "Can you tell me the weather forecast for today?"), # Valid index
+        (conversation, 2, "Sure, the weather today is sunny with a high of 25 degrees."), # Valid index
+        (conversation, -1, None), # Invalid index
+        (conversation, 3, None), # Invalid index
+        (conversation, 100, None), # Invalid index
+    ]
+
+    # Testing the function
+    for i, (conv, index, expected) in enumerate(test_cases):
+        result = get_message_content(conv, index)
+        assert result == expected, f"Test case {i+1} failed: expected {expected}, got {result}"
+        if result is None:
+            print(f"Test case {i+1} passed with invalid index: {index}")
+        else:
+            print(f"Test case {i+1} passed: {result}")
+
+# Define the function to be tested
+def get_message_content(conversation, index):
+    if 0 <= index < len(conversation):
+        return conversation[index]['content']
+    else:
+        print("Invalid index.")
+        return None
+
+# Run the test
+def HasInfo(userquery, chunk):
+    conversation = []
+    conversation = add_message(conversation, "user", "can the following question " + userquery + " be answered from the following text " + chunk + " reply with a yes or no")
+    # More logic here
+    res=send_chat_message(conversation)
+    return res
+
+# Example usage
+print(HasInfo("What is the date when entity 1 will pay its due", "entity 2 will pay its due by the end of August"))
