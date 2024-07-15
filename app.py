@@ -26,6 +26,8 @@ def convert_file(uploaded_file):
 
 st.title("DOC Q&A Azure Tool")
 
+question = st.text_input("Enter your question")
+
 uploaded_file = st.file_uploader("Choose a DOC file", type="doc")
 
 flattened = None
@@ -52,21 +54,21 @@ if uploaded_file is not None:
                         conversation = add_message(conversation, "user", sentence)
                     st.success('File processed successfully!')
 
-if flattened:
-    question = st.text_input("Enter your question")
-    if question:
-        if st.button("Read Question"):
-            with st.spinner('Analyzing...'):
-                relevant_info = ""
-                for sentence in flattened:
-                    hasinfo = HasInfo(question, sentence).choices[0].message.content
-                    if 'Yes' in hasinfo or 'yes' in hasinfo:
-                        relevant_info = sentence
-                        break
-                
-                if relevant_info:
-                    st.write("Relevant information found:", relevant_info)
-                else:
-                    st.write("No relevant information found.")
-else:
+if question and flattened:
+    if st.button("Read Question"):
+        with st.spinner('Analyzing...'):
+            relevant_info = ""
+            for sentence in flattened:
+                hasinfo = HasInfo(question, sentence).choices[0].message.content
+                if 'Yes' in hasinfo or 'yes' in hasinfo:
+                    relevant_info = sentence
+                    break
+            
+            if relevant_info:
+                st.write("Relevant information found:", relevant_info)
+            else:
+                st.write("No relevant information found.")
+elif not question:
+    st.warning("Please enter a question.")
+elif not flattened:
     st.warning("Please convert a DOC file first.")
