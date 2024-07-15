@@ -33,6 +33,6 @@ if uploaded_file is not None:
             output_path = convert_file(uploaded_file)
             st.success('Conversion successful!')
             
-            with open(output_path, "r") as file:
+            with open(output_path, "r", encoding="utf-8", errors="ignore") as file:
                 file_content = file.read()
                 st.text_area("Converted TXT file content", file_content, height=400)
