@@ -32,10 +32,11 @@ if uploaded_file is not None:
         with st.spinner('Converting...'):
             output_path = convert_file(uploaded_file)
             st.success('Conversion successful!')
-            with open(output_path, "r") as file:
+            
+            with open(output_path, "rb") as file:
                 st.download_button(
                     label="Download TXT file",
-                    data=file.read(),
+                    data=file,
                     file_name=output_path.name,
                     mime="text/plain"
                 )
