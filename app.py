@@ -1,50 +1,41 @@
 import streamlit as st
-import win32com.client
-import os
+import convertapi
+from pathlib import Path
 
+# Set your ConvertAPI secret
+convertapi.api_secret = 'UVJ2EbZ5ei63xEdu'
 
-def doc_to_text(doc_path):
-    # Ensure the path is absolute
-    doc_path = os.path.abspath(doc_path)
+def convert_file(uploaded_file):
+    # Save the uploaded file to a temporary location
+    temp_file_path = Path("/tmp") / uploaded_file.name
+    with open(temp_file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
 
-    try:
-        # Initialize the Word application
-        word = win32com.client.Dispatch("Word.Application")
-        word.Visible = False
+    # Convert the file
+    result = convertapi.convert('txt', {
+        'File': str(temp_file_path)
+    }, from_format='doc')
 
-        # Open the DOC file
-        doc = word.Documents.Open(doc_path)
+    # Save the converted file to the same directory
+    save_path = Path("/tmp") / (temp_file_path.stem + '.txt')
+    result.save_files(str(save_path))
 
-        # Extract text from the DOC file
-        text = doc.Range().Text
+    return save_path
 
-        # Close the DOC file
-        doc.Close()
+st.title("DOC to TXT Converter")
 
-        # Quit the Word application
-        word.Quit()
+uploaded_file = st.file_uploader("Choose a DOC file", type="doc")
 
-        return text
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        if 'word' in locals():
-            word.Quit()
-        return None
-
-
-# Streamlit interface
-st.title('DOC to Text Converter')
-doc_file = st.file_uploader("Choose a DOC file", type=['doc', 'docx'])
-if doc_file is not None:
-    # Save the uploaded file to a temporary path
-    with open(doc_file.name, "wb") as f:
-        f.write(doc_file.getbuffer())
-    
-    # Convert the DOC to text
-    text = doc_to_text(doc_file.name)
-    
-    if text:
-        # Display the extracted text in a textbox
-        st.text_area("Extracted Text", text, height=300)
-    else:
-        st.error("Failed to extract text. Please check the document format and try again.")
+if uploaded_file is not None:
+    st.write("File uploaded successfully.")
+    if st.button("Convert to TXT"):
+        with st.spinner('Converting...'):
+            output_path = convert_file(uploaded_file)
+            st.success('Conversion successful!')
+            with open(output_path, "r") as file:
+                st.download_button(
+                    label="Download TXT file",
+                    data=file.read(),
+                    file_name=output_path.name,
+                    mime="text/plain"
+                )
