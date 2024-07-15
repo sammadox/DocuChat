@@ -56,6 +56,7 @@ if uploaded_file is not None:
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
                             relevant_info=''
                             relevant_info = sentence
-                            st.write("The answer is:", relevant_info)
+                            st.write("Relevant information found:", relevant_info)
                             break
-                    st.success('File processed successfully!')
+               
+                   
