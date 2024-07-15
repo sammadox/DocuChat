@@ -48,7 +48,10 @@ if uploaded_file is not None:
                     conversation = []
                     for sentence in flattened:
                         conversation = add_message(conversation, "user", sentence)
-                    st.text_area("Converted TXT file content", "\n".join(conversation), height=400)
+                    
+                    # Ensure conversation is a list of strings
+                    conversation_text = "\n".join([msg['content'] for msg in conversation if isinstance(msg, dict) and 'content' in msg])
+                    st.text_area("Converted TXT file content", conversation_text, height=400)
 
     if 'flattened' in locals():
         question = st.text_input("Enter your question")
