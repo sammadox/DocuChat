@@ -2,7 +2,7 @@ import streamlit as st
 import convertapi
 from pathlib import Path
 from txtchunking import chunk_text, flatten_chunked_sentences
-from messages_operations import add_message
+from messages_operations import add_message, HasInfo
 
 # Set your ConvertAPI secret
 convertapi.api_secret = 'UVJ2EbZ5ei63xEdu'
@@ -53,4 +53,9 @@ if uploaded_file is not None:
     question = st.text_input("Enter your question")
     if question:
         if st.button("Read Question"):
-            st.write("Question entered:", question)
+            for sentence in flattened:
+                hasinfo=HasInfo(question,sentence).choices[0].message.content
+                if ('Yes' in hasinfo) or ('yes' in hasinfo):
+                    st.write("Answer is located in:", sentence)
+                    break
+            
