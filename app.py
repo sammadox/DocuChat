@@ -2,7 +2,7 @@ import streamlit as st
 import convertapi
 from pathlib import Path
 from txtchunking import chunk_text, flatten_chunked_sentences
-from messages_operations import add_message, HasInfo,answerquery
+from messages_operations import add_message, HasInfo
 
 # Set your ConvertAPI secret
 convertapi.api_secret = 'UVJ2EbZ5ei63xEdu'
@@ -57,6 +57,6 @@ if uploaded_file is not None:
                         hasinfo = HasInfo(question, sentence).choices[0].message.content
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
                             relevant_info = sentence
-                            #answer=answerquery(question,sentence).choices[0].message.content
+                           
+                            st.write("Relevant information found:", relevant_info)
                             break
-                    st.write("Relevant answer found:", relevant_info)
