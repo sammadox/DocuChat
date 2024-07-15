@@ -34,10 +34,10 @@ flattened = None
 
 if uploaded_file is not None:
     st.write("File uploaded successfully.")
-    if st.button("Convert to TXT"):
+    if st.button("Answer"):
         with st.spinner('Converting...'):
             output_path = convert_file(uploaded_file)
-            st.success('Conversion successful!')
+            st.success('Conversion to txt...')
             
             with open(output_path, "r", encoding="utf-8", errors="ignore") as file:
                 file_content = file.read()
@@ -53,6 +53,7 @@ if uploaded_file is not None:
                     for sentence in flattened:
                         hasinfo = HasInfo(question, sentence).choices[0].message.content
                         conversation = add_message(conversation, "user", sentence)
+                        print(hasinfo)
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
                             relevant_info=''
                             relevant_info = sentence
