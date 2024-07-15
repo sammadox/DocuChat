@@ -56,6 +56,7 @@ if uploaded_file is not None:
                     for sentence in flattened:
                         hasinfo = HasInfo(question, sentence).choices[0].message.content
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
+                            relevant_info=''
                             relevant_info = sentence
                             st.write("Relevant information found:", relevant_info)
                             break
