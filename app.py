@@ -55,7 +55,7 @@ if uploaded_file is not None:
                     st.success('File processed successfully!')
 
 if question and flattened:
-    if st.button("Read Question"):
+    if st.button("Answer Question"):
 
         with st.spinner('Analyzing...'):
             relevant_info = ""
