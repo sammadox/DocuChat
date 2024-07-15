@@ -51,12 +51,11 @@ if uploaded_file is not None:
                     flattened = flatten_chunked_sentences(chunked)
                     conversation = []
                     for sentence in flattened:
-                        conversation = add_message(conversation, "user", sentence)
-                    st.success('File processed successfully!')
-                    for sentence in flattened:
                         hasinfo = HasInfo(question, sentence).choices[0].message.content
+                        conversation = add_message(conversation, "user", sentence)
                         if 'Yes' in hasinfo or 'yes' in hasinfo:
                             relevant_info=''
                             relevant_info = sentence
-                            st.write("Relevant information found:", relevant_info)
+                            st.write("The answer is:", hasinfo)
                             break
+                    st.success('File processed successfully!')
