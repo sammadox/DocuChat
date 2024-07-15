@@ -56,15 +56,12 @@ if uploaded_file is not None:
 
 if question and flattened:
     if st.button("Read Question"):
+
         with st.spinner('Analyzing...'):
             relevant_info = ""
             for sentence in flattened:
                 hasinfo = HasInfo(question, sentence).choices[0].message.content
                 if 'Yes' in hasinfo or 'yes' in hasinfo:
                     relevant_info = sentence
+                    st.write("Relevant information found:", relevant_info)
                     break
-            
-            if relevant_info:
-                st.write("Relevant information found:", relevant_info)
-            else:
-                st.write("No relevant information found.")
