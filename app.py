@@ -22,7 +22,7 @@ def convert_file(uploaded_file):
 
     return save_path
 
-st.title("DOC to TXT Converter")
+st.title("DOC QA Azure")
 
 uploaded_file = st.file_uploader("Choose a DOC file", type="doc")
 
