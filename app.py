@@ -1,6 +1,7 @@
 import streamlit as st
 import convertapi
 from pathlib import Path
+from txtchunking import chunk_text, flatten_chunked_sentences
 
 # Set your ConvertAPI secret
 convertapi.api_secret = 'UVJ2EbZ5ei63xEdu'
@@ -22,7 +23,7 @@ def convert_file(uploaded_file):
 
     return save_path
 
-st.title("DOC to TXT Converter")
+st.title("DOC Q&A Azure Tool")
 
 uploaded_file = st.file_uploader("Choose a DOC file", type="doc")
 
@@ -35,4 +36,12 @@ if uploaded_file is not None:
             
             with open(output_path, "r", encoding="utf-8", errors="ignore") as file:
                 file_content = file.read()
-                st.text_area("Converted TXT file content", file_content, height=400)
+                if file_content:
+                    #Gramamr Data
+                    grammar = """
+            NP: {<DT>?<JJ>*<NN>}  # Chunk determiners, adjectives, and nouns
+                {<NNP>+}          # Chunk sequences of proper nouns
+        """ 
+                    chunked = chunk_text(file_content, grammar)
+                    flattened = flatten_chunked_sentences(chunked)
+                st.text_area("Converted TXT file content", flattened, height=400)
