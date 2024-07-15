@@ -68,7 +68,3 @@ if question and flattened:
                 st.write("Relevant information found:", relevant_info)
             else:
                 st.write("No relevant information found.")
-elif not question:
-    st.warning("Please enter a question.")
-elif not flattened:
-    st.warning("Please convert a DOC file first.")
