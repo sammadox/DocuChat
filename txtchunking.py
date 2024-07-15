@@ -1,5 +1,12 @@
 import nltk
-nltk.download('punkt', quiet=True)
+import os
+
+# Set the NLTK data path to the local nltk_data directory
+nltk_data_path = os.path.join(os.path.dirname(__file__), 'nltk_data')
+nltk.data.path.append(nltk_data_path)
+
+# Now you can safely import and use the NLTK functions
+from nltk.tokenize import word_tokenize, sent_tokenize
 
 def tokenize_text(text):
     """
