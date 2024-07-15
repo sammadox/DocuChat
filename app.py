@@ -1,7 +1,7 @@
 import streamlit as st
 import win32com.client
 import os
-import pythoncom  # Import the pythoncom module
+
 
 def doc_to_text(doc_path):
     # Ensure the path is absolute
