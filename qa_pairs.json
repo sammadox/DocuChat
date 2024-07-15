@@ -1,0 +1,53 @@
+{
+    "qa_pairs": [
+      {
+        "question": "What is the year-end date for Entity 1's returns?",
+        "answer": "The year-end date for Entity 1's returns is 31-Dec-23."
+      },
+      {
+        "question": "What types of returns did Entity 1 file?",
+        "answer": "Entity 1 filed Federal and PA returns."
+      },
+      {
+        "question": "What is the year-end date for Entity 2's returns?",
+        "answer": "The year-end date for Entity 2's returns is 31-Dec-23."
+      },
+      {
+        "question": "What types of returns did Entity 2 file?",
+        "answer": "Entity 2 filed Federal and PA returns."
+      },
+      {
+        "question": "What types of returns did Entity Name file?",
+        "answer": "Entity Name filed PA-65 returns."
+      },
+      {
+        "question": "How many entities filed PA-65 returns?",
+        "answer": "Five entities filed PA-65 returns."
+      },
+      {
+        "question": "What is the common year-end date for all entities mentioned?",
+        "answer": "The common year-end date for all mentioned entities is 31-Dec-23."
+      },
+      {
+        "question": "Did all entities file the same type of returns?",
+        "answer": "No, not all entities filed the same type of returns. Entity 1 and Entity 2 filed Federal and PA returns, while multiple entities named 'Entity Name' filed PA-65 returns."
+      },
+      {
+        "question": "Are there any entities that filed returns other than PA-65?",
+        "answer": "Yes, Entity 1 and Entity 2 filed Federal and PA returns."
+      },
+      {
+        "question": "What type of returns are most common among the entities?",
+        "answer": "PA-65 returns are the most common among the entities mentioned."
+      },
+      {
+        "question": "Which entity filed the most diverse types of returns?",
+        "answer": "Entity 1 and Entity 2 filed the most diverse types of returns, which include both Federal and PA returns."
+      },
+      {
+        "question": "Is there a pattern in the filing dates among the entities?",
+        "answer": "Yes, all entities mentioned have the same year-end date of 31-Dec-23, indicating a pattern in the filing dates."
+      }
+    ]
+  }
+  
