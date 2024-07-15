@@ -79,7 +79,7 @@ def get_message_content(conversation, index):
 # Run the test
 def HasInfo(userquery, chunk):
     conversation = []
-    conversation = add_message(conversation, "user", "can the following question " + userquery + " be answered from the following text " + chunk + " reply with a yes or no, as long as the answer")
+    conversation = add_message(conversation, "user", "can the following question " + userquery + " be answered from the following text " + chunk + " reply with a yes or no")
     # More logic here
     res=send_chat_message(conversation)
     return res
