@@ -49,4 +49,4 @@ if uploaded_file is not None:
                     conversation=[]
                     for sentence in flattened:
                         conversation=add_message(conversation, "user", sentence)
-                st.text_area("Converted TXT file content", flattened, height=400)
+                st.text_area("Converted TXT file content", conversation, height=400)
