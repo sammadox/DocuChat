@@ -22,7 +22,7 @@ def convert_file(uploaded_file):
 
     return save_path
 
-st.title("DOC QA Azure")
+st.title("DOC to TXT Converter")
 
 uploaded_file = st.file_uploader("Choose a DOC file", type="doc")
 
@@ -33,10 +33,6 @@ if uploaded_file is not None:
             output_path = convert_file(uploaded_file)
             st.success('Conversion successful!')
             
-            with open(output_path, "rb") as file:
-                st.download_button(
-                    label="Download TXT file",
-                    data=file,
-                    file_name=output_path.name,
-                    mime="text/plain"
-                )
+            with open(output_path, "r") as file:
+                file_content = file.read()
+                st.text_area("Converted TXT file content", file_content, height=400)
