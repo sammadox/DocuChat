@@ -58,5 +58,6 @@ if uploaded_file is not None:
                             relevant_info = sentence
                             st.write("Relevant information found:", relevant_info)
                             break
-               
+                    st.write("No relevant Information found in doc")
+                            
                    
