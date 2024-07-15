@@ -2,6 +2,8 @@ import streamlit as st
 import convertapi
 from pathlib import Path
 from txtchunking import chunk_text, flatten_chunked_sentences
+#To process chatobject variables
+from messages_operations import add_message
 
 # Set your ConvertAPI secret
 convertapi.api_secret = 'UVJ2EbZ5ei63xEdu'
@@ -44,4 +46,7 @@ if uploaded_file is not None:
         """ 
                     chunked = chunk_text(file_content, grammar)
                     flattened = flatten_chunked_sentences(chunked)
+                    conversation=[]
+                    for sentence in flattened:
+                        conversation=add_message(conversation, "user", sentence)
                 st.text_area("Converted TXT file content", flattened, height=400)
