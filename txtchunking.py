@@ -1,4 +1,5 @@
 import nltk
+
 import os
 
 # Set the NLTK data path to the local nltk_data directory
@@ -19,7 +20,6 @@ def tokenize_text(text):
     words = [nltk.word_tokenize(sentence) for sentence in sentences]
     return words
 
-nltk.download('averaged_perceptron_tagger')
 
 def pos_tag_sentences(sentences):
     """

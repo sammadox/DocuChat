@@ -4,7 +4,7 @@ from nltk.data import load
 
 # Attempt to find 'punkt' tokenizer
 try:
-    punkt_path = find('tokenizers/punkt')
+    punkt_path = find('tokenizers/averaged_perceptron_tagger')
     print(f"'punkt' tokenizer found at: {punkt_path}")
 except LookupError:
     print("'punkt' tokenizer not found. Downloading...")
