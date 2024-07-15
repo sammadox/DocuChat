@@ -48,14 +48,16 @@ if uploaded_file is not None:
                     conversation = []
                     for sentence in flattened:
                         conversation = add_message(conversation, "user", sentence)
-                st.text_area("Converted TXT file content", conversation, height=400)
+                    st.text_area("Converted TXT file content", conversation, height=400)
 
+if 'flattened' in locals():
     question = st.text_input("Enter your question")
     if question:
         if st.button("Read Question"):
             for sentence in flattened:
-                hasinfo=HasInfo(question,sentence).choices[0].message.content
+                hasinfo = HasInfo(question, sentence).choices[0].message.content
                 if ('Yes' in hasinfo) or ('yes' in hasinfo):
                     st.write("Answer is located in:", sentence)
                     break
-            
+else:
+    st.warning("Please convert a DOC file first.")
