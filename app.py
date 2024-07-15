@@ -2,7 +2,6 @@ import streamlit as st
 import convertapi
 from pathlib import Path
 from txtchunking import chunk_text, flatten_chunked_sentences
-#To process chatobject variables
 from messages_operations import add_message
 
 # Set your ConvertAPI secret
@@ -39,14 +38,18 @@ if uploaded_file is not None:
             with open(output_path, "r", encoding="utf-8", errors="ignore") as file:
                 file_content = file.read()
                 if file_content:
-                    #Gramamr Data
+                    # Grammar Data
                     grammar = """
             NP: {<DT>?<JJ>*<NN>}  # Chunk determiners, adjectives, and nouns
                 {<NNP>+}          # Chunk sequences of proper nouns
         """ 
                     chunked = chunk_text(file_content, grammar)
                     flattened = flatten_chunked_sentences(chunked)
-                    conversation=[]
+                    conversation = []
                     for sentence in flattened:
-                        conversation=add_message(conversation, "user", sentence)
+                        conversation = add_message(conversation, "user", sentence)
                 st.text_area("Converted TXT file content", conversation, height=400)
+
+    question = st.text_input("Enter your question")
+    if question:
+        st.write("Question entered:", question)
