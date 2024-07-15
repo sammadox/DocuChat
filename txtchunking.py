@@ -1,5 +1,5 @@
 import nltk
-
+from nltk import load
 import os
 
 # Set the NLTK data path to the local nltk_data directory
@@ -8,6 +8,8 @@ nltk.data.path.append(nltk_data_path)
 
 # Now you can safely import and use the NLTK functions
 from nltk.tokenize import word_tokenize, sent_tokenize
+
+tagger = load('nltk_data/taggers/averaged_perceptron_tagger/averaged_perceptron_tagger.pickle')
 
 def tokenize_text(text):
     """

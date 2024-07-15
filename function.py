@@ -2,18 +2,18 @@ import nltk
 from nltk.data import find
 from nltk.data import load
 
-# Attempt to find 'punkt' tokenizer
+# Attempt to find 'averaged_perceptron_tagger'
 try:
-    punkt_path = find('tokenizers/averaged_perceptron_tagger')
-    print(f"'punkt' tokenizer found at: {punkt_path}")
+    tagger_path = find('taggers/averaged_perceptron_tagger')
+    print(f"'averaged_perceptron_tagger' found at: {tagger_path}")
 except LookupError:
-    print("'punkt' tokenizer not found. Downloading...")
-    nltk.download('punkt')
-    print("Downloaded 'punkt' tokenizer.")
+    print("'averaged_perceptron_tagger' not found. Downloading...")
+    nltk.download('averaged_perceptron_tagger')
+    print("Downloaded 'averaged_perceptron_tagger'.")
 
-# Verify that 'punkt' tokenizer can be loaded
+# Verify that 'averaged_perceptron_tagger' can be loaded
 try:
-    tokenizer = load('tokenizers/punkt/english.pickle')
-    print("'punkt' tokenizer loaded successfully.")
+    tagger = load('taggers/averaged_perceptron_tagger/averaged_perceptron_tagger.pickle')
+    print("'averaged_perceptron_tagger' loaded successfully.")
 except LookupError:
-    print("Failed to load 'punkt' tokenizer.")
+    print("Failed to load 'averaged_perceptron_tagger'.")
