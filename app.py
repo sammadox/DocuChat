@@ -4,8 +4,6 @@ import os
 import pythoncom  # Import the pythoncom module
 
 def doc_to_text(doc_path):
-    pythoncom.CoInitialize()  # Initialize the COM library
-
     # Ensure the path is absolute
     doc_path = os.path.abspath(doc_path)
 
@@ -32,6 +30,7 @@ def doc_to_text(doc_path):
         if 'word' in locals():
             word.Quit()
         return None
+
 
 # Streamlit interface
 st.title('DOC to Text Converter')
