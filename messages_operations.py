@@ -85,4 +85,3 @@ def HasInfo(userquery, chunk):
     return res
 
 # Example usage
-print(HasInfo("What is the date when entity 1 will pay its due", "entity 2 will pay its due by the end of August"))
