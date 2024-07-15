@@ -28,6 +28,9 @@ st.title("DOC Q&A Azure Tool")
 
 uploaded_file = st.file_uploader("Choose a DOC file", type="doc")
 
+flattened = None
+conversation_text = ""
+
 if uploaded_file is not None:
     st.write("File uploaded successfully.")
     if st.button("Convert to TXT"):
@@ -53,17 +56,17 @@ if uploaded_file is not None:
                     conversation_text = "\n".join([msg['content'] for msg in conversation if isinstance(msg, dict) and 'content' in msg])
                     st.text_area("Converted TXT file content", conversation_text, height=400)
 
-    if 'flattened' in locals():
-        question = st.text_input("Enter your question")
-        if question:
-            if st.button("Read Question"):
-                with st.spinner('Analyzing...'):
-                    for sentence in flattened:
-                        hasinfo = HasInfo(question, sentence).choices[0].message.content
-                        if 'Yes' in hasinfo or 'yes' in hasinfo:
-                            st.write("Answer is located in:", sentence)
-                            break
-                    else:
-                        st.write("No relevant information found.")
+if flattened:
+    question = st.text_input("Enter your question")
+    if question:
+        if st.button("Read Question"):
+            with st.spinner('Analyzing...'):
+                for sentence in flattened:
+                    hasinfo = HasInfo(question, sentence).choices[0].message.content
+                    if 'Yes' in hasinfo or 'yes' in hasinfo:
+                        st.write("Answer is located in:", sentence)
+                        break
+                else:
+                    st.write("No relevant information found.")
 else:
     st.warning("Please convert a DOC file first.")
